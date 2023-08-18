@@ -3,11 +3,11 @@ import threading
 
 nickname = input("Choose your nickname: ")
 
-host = 'https://alphanode.onrender.com/'
+host = 'https://quartz-apmy.onrender.com'
 port = 9999
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((host))
+client.connect((host,port))
 
 def recieve ():
     while True:
