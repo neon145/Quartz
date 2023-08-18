@@ -4,12 +4,13 @@ import socket
 import threading
 
 # Connection data
-host = 'quartz-apmy.onrender.com'
+host = 'localhost'
 port = 10000
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
 server.bind((host,port))
+
 server.listen()
 
 # Quartz User data
