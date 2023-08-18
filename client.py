@@ -3,11 +3,11 @@ import threading
 
 nickname = input("Choose your nickname: ")
 
-host = 'localhost'
+host = 'https://alphanode.onrender.com/'
 port = 9999
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((host, port))
+client.connect((host))
 
 def recieve ():
     while True:
@@ -27,7 +27,7 @@ def write():
         message = f'{nickname}: {input("")}'
         client.send(message.encode('ascii'))
 
-recieveThread = threading.Thread(targed = recieve)
+recieveThread = threading.Thread(target = recieve)
 recieveThread.start()
-writeThread = threading.Thread(targed = write)
+writeThread = threading.Thread(target = write)
 writeThread.start()

@@ -4,12 +4,12 @@ import socket
 import threading
 
 # Connection data
-host = 'localhost'
+host = 'https://alphanode.onrender.com/'
 port = 9999
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
-server.bind((host, port))
+server.bind((host))
 server.listen()
 
 # Quartz User data
