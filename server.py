@@ -3,7 +3,7 @@ import threading
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('0.0.0.0', 80))  # Listen on all interfaces, port 80 (HTTP default)
+server.bind(('0.0.0.0', 1000))  # Listen on all interfaces, port 80 (HTTP default)
 
 server.listen()
 print("Listening.......")

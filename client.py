@@ -4,12 +4,12 @@ import threading
 nickname = input("Choose your nickname: ")
 
 host = 'quartz-apmy.onrender.com'
-port = 443
+port = 80
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((host,port))
+client.connect((host, port))
 
-def recieve ():
+def receive():
     while True:
         try:
             message = client.recv(1024).decode('ascii')
@@ -18,7 +18,7 @@ def recieve ():
             else:
                 print(message)
         except:
-            print("An Error occured")
+            print("An Error occurred")
             client.close()
             break
 
@@ -27,7 +27,7 @@ def write():
         message = f'{nickname}: {input("")}'
         client.send(message.encode('ascii'))
 
-recieveThread = threading.Thread(target = recieve)
-recieveThread.start()
-writeThread = threading.Thread(target = write)
+receiveThread = threading.Thread(target=receive)
+receiveThread.start()
+writeThread = threading.Thread(target=write)
 writeThread.start()
