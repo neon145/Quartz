@@ -12,7 +12,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connect
 server.bind((host,port))
 
 server.listen()
-
+print("Listening.......")
 # Quartz User data
 clients = []
 nicknames = []
