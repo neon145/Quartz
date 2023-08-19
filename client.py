@@ -3,8 +3,8 @@ import threading
 
 nickname = input("Choose your nickname: ")
 
-host = 'quartz-apmy.onrender.com'
-port = 10000
+host = 'wss://quartz-apmy.onrender.com'
+port = 7075
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect((host,port))
