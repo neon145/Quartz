@@ -5,7 +5,7 @@ import threading
 
 # Connection data
 host = 'localhost'
-port = 1000
+port = 443
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
