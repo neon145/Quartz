@@ -4,7 +4,7 @@ import socket
 import threading
 
 # Connection data
-host = '0.0.0.0'
+host = 'quartz-apmy.onrender.com'
 port = 1000
 
 # Starting the server
