@@ -4,8 +4,8 @@ import socket
 import threading
 
 # Connection data
-host = 'quartz-apmy.onrender.com'
-port = 7075
+host = '0.0.0.0'
+port = 1000
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
