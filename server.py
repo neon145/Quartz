@@ -4,7 +4,7 @@ import socket
 import threading
 
 # Connection data
-host = '216.24.57.253'
+host = 'localhost'
 port = 1000
 
 # Starting the server
