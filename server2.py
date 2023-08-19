@@ -4,8 +4,8 @@ import socket
 import threading
 
 # Connection data
-host = '0.0.0.0'
-port = 1000
+host = '127.0.0.1'
+port = 5555
 
 # Starting the server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
