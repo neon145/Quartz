@@ -1,63 +1,66 @@
-# Socket used for communication
-# Threading used for running multiple processes at once
 import socket
 import threading
 
-# Connection data
-host = 'localhost'
-port = 443
-
 # Starting the server
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # SOCK_STREAM connection ensures TCP connection
-server.bind((host,port))
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(('0.0.0.0', 80))  # Listen on all interfaces, port 80 (HTTP default)
 
 server.listen()
 print("Listening.......")
-# Quartz User data
+
+# Chat user data
 clients = []
 nicknames = []
 
 # Broadcasting messages to all connected clients
-def broadcast (message):
-    for client in clients:
-        client.send(message)
+def broadcast(message, client):
+    for c in clients:
+        if c != client:
+            try:
+                c.send(message)
+            except:
+                # Handle client removal
+                index = clients.index(c)
+                clients.remove(c)
+                c.close()
 
-# Handle messages from clients 
-def handle_message (client):
+                nickname = nicknames[index]
+                broadcast(f'{nickname} left the chat'.encode('ascii'), server)
+                nicknames.remove(nickname)
+                break
+
+# Handle messages from clients
+def handle_message(client):
     while True:
         try:
             message = client.recv(1024)
-            broadcast(message)
+            broadcast(message, client)
         except:
-            # Removing clients
+            # Handle client removal
             index = clients.index(client)
             clients.remove(client)
             client.close()
 
-            nickname = nickname[index]
-            broadcast(f'{nickname.encode("ascii")} left')
+            nickname = nicknames[index]
+            broadcast(f'{nickname} left the chat'.encode('ascii'), server)
             nicknames.remove(nickname)
             break
 
 # Handling users joining
 def receive():
     while True:
-        # Accept Connection
         client, address = server.accept()
         print("Connected with {}".format(str(address)))
 
-        # Request And Store Nickname
         client.send('NICK'.encode('ascii'))
         nickname = client.recv(1024).decode('ascii')
         nicknames.append(nickname)
         clients.append(client)
 
-        # Print And Broadcast Nickname
         print("Nickname is {}".format(nickname))
-        broadcast("{} joined!".format(nickname).encode('ascii'))
-        client.send('Connected to server!'.encode('ascii'))
+        broadcast("{} joined the chat!".format(nickname).encode('ascii'), server)
+        client.send('Connected to the chat server!'.encode('ascii'))
 
-        # Start Handling Thread For Client
         thread = threading.Thread(target=handle_message, args=(client,))
         thread.start()
 
